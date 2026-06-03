@@ -7,7 +7,7 @@ import { REGIONS } from "@/data/regions";
 
 export default function SignupPage() {
   const router = useRouter();
-  const { signup, googleLogin } = useAuth();
+  const { signup } = useAuth();
   const [step, setStep] = useState(1); // 1: method, 2: details, 3: verification
   const [method, setMethod] = useState<"email" | "phone" | "google">("email");
   const [formData, setFormData] = useState({
@@ -95,20 +95,7 @@ export default function SignupPage() {
   };
 
   const handleGoogleSignup = async () => {
-    const email = prompt("أدخل بريدك الإلكتروني (محاكاة Google):");
-    const name = prompt("أدخل اسمك:");
-
-    if (email && name) {
-      setIsLoading(true);
-      try {
-        const success = await googleLogin(email, name);
-        if (success) {
-          router.push("/");
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    }
+    alert("Google Sign-up قريباً!");
   };
 
   return (
