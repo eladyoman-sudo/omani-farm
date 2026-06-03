@@ -8,7 +8,7 @@ type LoginMethod = "email" | "phone" | "google";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, googleLogin, isLoading } = useAuth();
+  const { login } = useAuth();
   const [method, setMethod] = useState<LoginMethod>("email");
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -32,15 +32,7 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = async () => {
-    const email = prompt("أدخل بريدك الإلكتروني (محاكاة Google):");
-    const name = prompt("أدخل اسمك:");
-
-    if (email && name) {
-      const success = await googleLogin(email, name);
-      if (success) {
-        router.push("/");
-      }
-    }
+    alert("Google Login قريباً!");
   };
 
   return (
