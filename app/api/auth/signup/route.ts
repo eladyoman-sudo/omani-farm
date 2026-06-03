@@ -25,11 +25,12 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if user exists
+    const orConditions: any[] = [];
+    if (email) orConditions.push({ email });
+    if (phone) orConditions.push({ phone });
+
     const existingUser = await User.findOne({
-      $or: [
-        email ? { email } : null,
-        phone ? { phone } : null,
-      ].filter(Boolean),
+      $or: orConditions,
     });
 
     if (existingUser) {
