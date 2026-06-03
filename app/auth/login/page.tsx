@@ -13,21 +13,28 @@ export default function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
     if (!emailOrPhone || !password) {
       setError("الرجاء ملء جميع الحقول");
+      setIsLoading(false);
       return;
     }
 
-    const success = await login(emailOrPhone, password);
-    if (success) {
-      router.push("/");
-    } else {
-      setError("بيانات الدخول غير صحيحة");
+    try {
+      const success = await login(emailOrPhone, password);
+      if (success) {
+        router.push("/");
+      } else {
+        setError("بيانات الدخول غير صحيحة");
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
